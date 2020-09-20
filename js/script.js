@@ -12,6 +12,7 @@
 //  humidity
 
 //element references
+const searchForm = $("#search-form");
 const cityInput = $("#city");
 const todayResults = $("#result-today");
 const forecastCards = $("#forecast-cards .card");
@@ -27,11 +28,17 @@ const getResults = (city) => {
     $.ajax({
         url: queryURL,
         method: 'GET'
-    }).then(function(response) {
+    }).done(function(response) {
         console.log(response);
-    }).err(function(error) {
-        console.log(error);
+        
+    }).fail(function(error) {
+        console.log(error.responseText);
     })
 }
+
+searchForm.on("submit", function(e) {
+    e.preventDefault();
+    getResults(cityInput.val());
+})
 
 init();
