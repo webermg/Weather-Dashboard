@@ -55,17 +55,17 @@
     <main class="container">
         <div class="row">
             <div class="col s3">
-                <div id="search-results" class="row grey lighten-4">
-                    <div class="input-field col s12">
+                <div class="row grey lighten-4">
+                    <form id="search-form" class="input-field col s12">
                       <input id="city" type="text" class="validate">
                       <label for="city">City</label>
-                    </div>
+                    </form>
                 </div>
             </div>
             <div class="col s9 blue lighten-4">
                 <div class="row">
                         <div id="result-today" class="col s12">
-                            <h4>city name <span id="today-date"></span> <span id="today-icon"></span> </h4>
+                            <h4 id="today-header" ><span id="city-name">city name </span> <span id="today-date">date</span> <span id="today-icon">icon</span></h4>
                             <p id="today-temp">temperature</p>
                             <p id="today-humidity">humidity</p>
                             <p id="today-wind">wind speed</p>
