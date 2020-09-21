@@ -45,7 +45,7 @@ const getResults = (city) => {
     }).done(function(response) {
         //TODO remove this
         console.log(response);
-        //return;
+        if(response.error) return;
         const lat = response.latt;
         const lon = response.longt;
         queryURL2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&units=imperial&appid=${api}`;
@@ -138,7 +138,7 @@ const refreshHistory = () => {
     let historySection = $("#input-history");
     for (const item of history) {
         let row = $("<div>").addClass("row");
-        let col = $("<div>").addClass("col s12").html(`<a class="waves-effect waves-light btn-large">${item}</a>`);
+        let col = $("<div>").addClass("col s12").html(`<a class="waves-effect waves-light btn-small stretch">${item}</a>`);
         historySection.append(row.append(col));
     }
 }

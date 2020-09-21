@@ -16,28 +16,6 @@
 
 <body>
 
-    <!-- header/navbar
-        row
-            two columns
-                first column
-                    11 rows
-                        first row - form
-                        next ten rows - search history
-                secon column
-                    three rows
-                        first row
-                            one column
-                                5 rows
-                                    first header
-                                    next 4 text
-                        second row
-                            one column
-                                header
-                        third row
-                            5 columns
-                                all 5 cards
-                         -->
-
     <!-- navbar boilerplate -->
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
@@ -56,13 +34,22 @@
         <div class="row">
             <div class="col s3">
                 <div class="row grey lighten-4">
-                    <form id="search-form" class="input-field col s12">
-                      <input id="city" type="text" class="validate">
-                      <label for="city">City</label>
-                      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-                        <i class="material-icons right"></i>
-                      </button>
-                    </form>
+                    <!-- <div class="col s12"> -->
+                        <form id="search-form" class="input-field col s12">
+                            <!-- <div class="row"> -->
+                            <!-- <div class="col s9"> -->
+                                <label for="city">City</label>
+                                <input id="city" type="text" class="validate">
+                            
+                            <!-- </div> -->
+                            <!-- <div class="col s3"> -->
+                            <button class="btn waves-effect waves-light right" type="submit" name="action">
+                                <i class="material-icons">search</i>
+                            </button>
+                            <!-- </div> -->
+                            <!-- </div> -->
+                        </form>
+                    <!-- </div> -->
                 </div>
                 <div class="row">
                     <div id="input-history" class="col s12"></div>
