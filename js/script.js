@@ -36,11 +36,10 @@ $(window).on("unload", function() {
 
 const getResults = (city) => {
     const api = '432919c539be1e9eaadf34617ce6b063';
-    queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`
-    let test = `https://geocode.xyz/${city}?json=1`
+    const queryURL = `https://geocode.xyz/${city}?json=1`;
 
     $.ajax({
-        url: test,
+        url: queryURL,
         method: 'GET'
     }).done(function(response) {
         //TODO remove this
@@ -55,6 +54,8 @@ const getResults = (city) => {
         }).done(function(response) {
             //TODO remove this
             console.log(response);
+            addToHistory(city);
+            refreshHistory();
             loadTodayResult(response, city);
             loadForecastResult(response);
         }).fail(function(error) {
@@ -65,6 +66,7 @@ const getResults = (city) => {
         console.log(error.responseText);
     });
 }
+
 
 const loadTodayResult = (response, city) => {
     //header
@@ -97,16 +99,12 @@ const loadForecastResult = response => {
 searchForm.on("submit", function(e) {
     e.preventDefault();
     let input = cityInput.val().toLowerCase().trim();
-    console.log(input);
     cityInput.val("");
     //load into history
     //  check history for duplicate
     //  if duplicate then reorder history to put duplicate on top
     //  else drop least recent and add to history
-    addToHistory(input);
-    
-    refreshHistory();
-    getResults(input);
+    if(input.length > 0) getResults(input);
 })
 
 //history functions
