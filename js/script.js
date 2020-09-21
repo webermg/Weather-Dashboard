@@ -19,12 +19,20 @@ const forecastCards = $("#forecast-cards .card");
 
 const MS_IN_DAY = 86400000;
 
-const history = [];
+let history = [];
 
-const init = () => {
-
+$(document).ready(() => {
+    //load from localstorage
+    history = localStorage.getItem("history") != null ? JSON.parse(localStorage.getItem("history")) : [];
     
-}
+    refreshHistory();
+});
+
+$(window).on("unload", function() {
+    //write to localstorage
+    localStorage.setItem("history", JSON.stringify(history));
+})
+
 
 const getResults = (city) => {
     const api = '432919c539be1e9eaadf34617ce6b063';
@@ -47,7 +55,7 @@ const getResults = (city) => {
         }).done(function(response) {
             //TODO remove this
             console.log(response);
-            loadTodayResult(response);
+            loadTodayResult(response, city);
             loadForecastResult(response);
         }).fail(function(error) {
             console.log(error.responseText);
@@ -58,11 +66,11 @@ const getResults = (city) => {
     });
 }
 
-const loadTodayResult = response => {
+const loadTodayResult = (response, city) => {
     //header
     let today = new Date();
     const header = todayResults.children("#today-header");
-    header.children("#city-name").text(cityInput.val());
+    header.children("#city-name").text(city.toUpperCase());
     header.children("#today-date").text(`(${today.toLocaleDateString()})`);
     header.children("#today-icon").html(`<img src="http://openweathermap.org/img/wn/${response.current.weather[0].icon}.png">`);
 
@@ -93,18 +101,9 @@ searchForm.on("submit", function(e) {
     //  check history for duplicate
     //  if duplicate then reorder history to put duplicate on top
     //  else drop least recent and add to history
-    if(history.indexOf(input) != -1) {
-        bubbleUp(input);
-    }
-    else {
-        if(history.length === 10) {
-            history[9] = input;
-            bubbleUp(input);
-        }
-        else history.unshift(input);
-    }
-    $("#input-history").empty();
-    displayHistory();
+    addToHistory(input);
+    
+    refreshHistory();
     getResults(cityInput.val());
 })
 
@@ -120,8 +119,22 @@ const bubbleUp = item => {
     }
 }
 
-//generates html and appends to 
-const displayHistory = () => {
+const addToHistory = item => {
+    if(history.indexOf(item) != -1) {
+        bubbleUp(item);
+    }
+    else {
+        if(history.length === 10) {
+            history[9] = item;
+            bubbleUp(item);
+        }
+        else history.unshift(item);
+    }
+}
+
+//generates html and appends to history display area
+const refreshHistory = () => {
+    $("#input-history").empty();
     let historySection = $("#input-history");
     for (const item of history) {
         let row = $("<div>").addClass("row");
@@ -130,4 +143,8 @@ const displayHistory = () => {
     }
 }
 
-init();
+$("#input-history").on("click", function(e) {
+    bubbleUp($(e.target).text());
+    refreshHistory();
+    getResults($(e.target).text());
+});
