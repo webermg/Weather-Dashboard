@@ -148,3 +148,8 @@ $("#input-history").on("click", function(e) {
     refreshHistory();
     getResults($(e.target).text());
 });
+
+$("#clear-history").on("click", () => {
+    history = [];
+    refreshHistory();
+})
