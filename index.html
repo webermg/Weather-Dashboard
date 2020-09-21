@@ -9,7 +9,7 @@
 
     <!-- Materialize minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
 
 </head>
@@ -59,7 +59,13 @@
                     <form id="search-form" class="input-field col s12">
                       <input id="city" type="text" class="validate">
                       <label for="city">City</label>
+                      <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+                        <i class="material-icons right"></i>
+                      </button>
                     </form>
+                </div>
+                <div class="row">
+                    <div id="input-history" class="col s12"></div>
                 </div>
             </div>
             <div class="col s9 blue lighten-4">
@@ -74,12 +80,22 @@
                 </div>
                 <div class="row">
                     <div id="forecast-header" class="col s12">
-                        <h5>5-Day Forecast</h5>
+                        <h5>6-Day Forecast</h5>
                     </div> 
                 </div>
                 <div class="row">
                     <div id="forecast-cards" class="col s12">
                         <div class="row">
+                            <div class="col s2">
+                                <div class="card blue-grey darken-1">
+                                    <div class="card-content white-text">
+                                    <span class="card-title">Date</span>
+                                    <p id="forecast-icon">weather icon</p>
+                                    <p id="forecast-temp">temp</p>
+                                    <p id="forecast-humidity">humidity</p>
+                                    </div>
+                                </div>
+                            </div>
                             <div class="col s2">
                                 <div class="card blue-grey darken-1">
                                     <div class="card-content white-text">
