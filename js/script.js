@@ -97,6 +97,8 @@ const loadForecastResult = response => {
 searchForm.on("submit", function(e) {
     e.preventDefault();
     let input = cityInput.val().toLowerCase().trim();
+    console.log(input);
+    cityInput.val("");
     //load into history
     //  check history for duplicate
     //  if duplicate then reorder history to put duplicate on top
@@ -104,7 +106,7 @@ searchForm.on("submit", function(e) {
     addToHistory(input);
     
     refreshHistory();
-    getResults(cityInput.val());
+    getResults(input);
 })
 
 //history functions

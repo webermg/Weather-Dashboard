@@ -11,7 +11,14 @@ populate forecast for searched city -done
 build a queue for search history -done
 get icons working
 
+empty out city field when form submitted
+trim city input on submit - done
 
-look into google maps for lat/lon
+do not add city to history or try to search if input empty or returns no result
+revise cards to sit in a flexbox
+format card info to fit
+border off daily section
+
+
 
 searching for a city that does not exist returns 404
