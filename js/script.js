@@ -14,6 +14,7 @@
 //element references
 const searchForm = $("#search-form");
 const cityInput = $("#city");
+const loadingBar = $("#loading-bar");
 const todayResults = $("#result-today");
 const forecastCards = $("#forecast-cards .card");
 
@@ -23,6 +24,7 @@ let history = [];
 
 $(document).ready(() => {
     //load from localstorage
+    loadingBar.hide();
     history = localStorage.getItem("history") != null ? JSON.parse(localStorage.getItem("history")) : [];
     
     refreshHistory();
@@ -37,6 +39,7 @@ $(window).on("unload", function() {
 const getResults = (city) => {
     const api = '432919c539be1e9eaadf34617ce6b063';
     const queryURL = `https://geocode.xyz/${city}?json=1`;
+    loadingBar.show();
 
     $.ajax({
         url: queryURL,
@@ -58,6 +61,7 @@ const getResults = (city) => {
             refreshHistory();
             loadTodayResult(response, city);
             loadForecastResult(response);
+            loadingBar.hide();
         }).fail(function(error) {
             console.log(error.responseText);
         });
@@ -79,7 +83,8 @@ const loadTodayResult = (response, city) => {
     todayResults.children("#today-temp").text(`Temperature: ${response.current.temp} °F`);
     todayResults.children("#today-humidity").text(`Humidity: ${response.current.humidity}%`);
     todayResults.children("#today-wind").text(`Wind Speed:  ${response.current.wind_speed} MPH`);
-    todayResults.children("#today-uv").text(`UV Index: ${response.current.uvi}`);
+    todayResults.find("#uv-value").text(` ${response.current.uvi} `);
+    todayResults.find("#uv-value").addClass("red");
 }
 
 const loadForecastResult = response => {
@@ -104,7 +109,9 @@ searchForm.on("submit", function(e) {
     //  check history for duplicate
     //  if duplicate then reorder history to put duplicate on top
     //  else drop least recent and add to history
-    if(input.length > 0) getResults(input);
+    if(input.length > 0) {
+        getResults(input);
+    }
 })
 
 //history functions
