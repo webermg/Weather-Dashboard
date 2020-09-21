@@ -19,7 +19,10 @@ const forecastCards = $("#forecast-cards .card");
 
 const MS_IN_DAY = 86400000;
 
+const history = [];
+
 const init = () => {
+
     
 }
 
@@ -69,7 +72,7 @@ const loadTodayResult = response => {
     todayResults.children("#today-uv").text(`UV Index: ${response.current.uvi}`);
 }
 
-const loadForecastResult = (response) => {
+const loadForecastResult = response => {
     let day = 0;
     let tomorrow = new Date();
     tomorrow.setTime(tomorrow.getTime() + MS_IN_DAY);
@@ -85,7 +88,46 @@ const loadForecastResult = (response) => {
 
 searchForm.on("submit", function(e) {
     e.preventDefault();
-    getResults(cityInput.val());
+    let input = cityInput.val().toLowerCase();
+    //load into history
+    //  check history for duplicate
+    //  if duplicate then reorder history to put duplicate on top
+    //  else drop least recent and add to history
+    if(history.indexOf(input) != -1) {
+        bubbleUp(input);
+    }
+    else {
+        if(history.length === 10) {
+            history[9] = input;
+            bubbleUp(input);
+        }
+        else history.unshift(input);
+    }
+    $("#input-history").empty();
+    displayHistory();
+    //getResults(cityInput.val());
 })
+
+//history functions
+const bubbleUp = item => {
+    if(history.indexOf(item) === -1) return;
+    let ind = history.indexOf(item);
+    while(ind > 0) {
+        const temp = history[ind-1];
+        history[ind-1] = history[ind];
+        history[ind] = temp;
+        ind--;
+    }
+}
+
+//generates html and appends to 
+const displayHistory = () => {
+    let historySection = $("#input-history");
+    for (const item of history) {
+        let row = $("<div>").addClass("row");
+        let col = $("<div>").addClass("col s12").html(`<a class="waves-effect waves-light btn-large">${item}</a>`);
+        historySection.append(row.append(col));
+    }
+}
 
 init();
