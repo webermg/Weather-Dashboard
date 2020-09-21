@@ -64,7 +64,7 @@ const loadTodayResult = response => {
     const header = todayResults.children("#today-header");
     header.children("#city-name").text(cityInput.val());
     header.children("#today-date").text(`(${today.toLocaleDateString()})`);
-    header.children("#today-icon").text("icon");
+    header.children("#today-icon").html(`<img src="http://openweathermap.org/img/wn/${response.current.weather[0].icon}.png">`);
 
     todayResults.children("#today-temp").text(`Temperature: ${response.current.temp} °F`);
     todayResults.children("#today-humidity").text(`Humidity: ${response.current.humidity}%`);
@@ -78,7 +78,7 @@ const loadForecastResult = response => {
     tomorrow.setTime(tomorrow.getTime() + MS_IN_DAY);
     forecastCards.each(function() {
         $(this).find(".card-title").text(tomorrow.toLocaleDateString());
-        $(this).find("#forecast-icon").text("NYI");
+        $(this).find("#forecast-icon").html(`<img src="http://openweathermap.org/img/wn/${response.daily[day].weather[0].icon}.png">`);
         $(this).find("#forecast-temp").text(`Temp: ${response.daily[day].temp.day} °F`);
         $(this).find("#forecast-humidity").text(`Humidity: ${response.daily[day].humidity}%`);
         day++;
@@ -105,7 +105,7 @@ searchForm.on("submit", function(e) {
     }
     $("#input-history").empty();
     displayHistory();
-    //getResults(cityInput.val());
+    getResults(cityInput.val());
 })
 
 //history functions
