@@ -124,7 +124,7 @@ const loadTodayResult = (response, city) => {
 
     //more panel
     moreTodayResults.children("#today-temp-feels").text(`Feels like: ${response.current.feels_like.toFixed(1)} °F`);
-    moreTodayResults.children("#today-vis").text(`Visibility: ${response.current.visibility / 1000}Km`);
+    moreTodayResults.children("#today-vis").text(`Visibility: ${response.current.visibility / 1000}km`);
     moreTodayResults.children("#today-pressure").text(`Pressure: ${(response.current.pressure / 33.86).toFixed(2)} inHg`);
     moreTodayResults.children("#today-precip").text(`Chance of Precipitation: ${response.daily[0].pop * 100}%`);
 
