@@ -24,13 +24,13 @@ get uv index background working -done
 add loading indicator while calls are running -done
 
 format for viewports 1200, 992, 600, 500 -done
-add a data-city attribute to history buttons
+add a data-city attribute to history buttons -done
     add to buttons
     pass to getresults
-fix uvi display
-hide cards on page load
+fix uvi display -done
+hide cards on page load -done
 
-border off daily section
+border off daily section -done
 allow for city, country or city,state,country
 add an accordion thing to hold more data
 

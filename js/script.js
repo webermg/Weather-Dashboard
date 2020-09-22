@@ -12,10 +12,7 @@
 //  humidity
 
 //element references
-const searchForm = $("#search-form");
-const cityInput = $("#city");
 const loadingBar = $("#loading-bar");
-const todayResults = $("#result-today");
 const forecastCards = $("#forecast-cards .card");
 
 const MS_IN_DAY = 86400000;
@@ -30,6 +27,10 @@ $(document).ready(() => {
     refreshHistory();
     console.log(history.length);
     if(history.length > 0) getResults(history[0]);
+    $('.collapsible').collapsible();
+    forecastCards.each(function() {
+        $(this).hide();
+    })
 });
 
 //saves the existing search history to localstorage on document unload
@@ -80,14 +81,19 @@ const getResults = (city) => {
 
 //loads weather data for today
 const loadTodayResult = (response, city) => {
+    const todayResults = $("#result-today");
+    const moreTodayResults = $("#result-today-more");
     //header
     let today = new Date();
     const header = $("#today-header");
     header.children("#city-name").text(city.toUpperCase());
     header.children("#today-date").text(`(${today.toLocaleDateString()})`);
+    
+    //weather image
     $("#today-icon").html(`<img src="http://openweathermap.org/img/wn/${response.current.weather[0].icon}@2x.png">`);
 
-    todayResults.children("#today-temp").text(`Temperature: ${response.current.temp} °F`);
+    //first panel
+    todayResults.children("#today-temp").text(`Temperature: ${response.current.temp.toFixed(1)} °F`);
     todayResults.children("#today-humidity").text(`Humidity: ${response.current.humidity}%`);
     todayResults.children("#today-wind").text(`Wind Speed:  ${response.current.wind_speed} MPH`);
     todayResults.find("#uv-value").text(` ${response.current.uvi} `);
@@ -115,11 +121,19 @@ const loadTodayResult = (response, city) => {
         default:
             todayResults.find("#uv-value").addClass("purple white-text");
     }
+
+    //more panel
+    moreTodayResults.children("#today-temp-feels").text(`Feels like: ${response.current.feels_like.toFixed(1)} °F`);
+    moreTodayResults.children("#today-vis").text(`Visibility: ${response.current.visibility / 1000}Km`);
+    moreTodayResults.children("#today-pressure").text(`Pressure: ${(response.current.pressure / 33.86).toFixed(2)} inHg`);
+    moreTodayResults.children("#today-precip").text(`Chance of Precipitation: ${response.daily[0].pop * 100}%`);
+
+
 }
 
 //loads the data into the future forecast cards
 const loadForecastResult = response => {
-    let day = 0;
+    let day = 1;
     let date = new Date();
     date.setTime(date.getTime() + MS_IN_DAY);
     forecastCards.each(function() {
@@ -127,14 +141,11 @@ const loadForecastResult = response => {
         $(this).find("#forecast-icon").html(`<img src="http://openweathermap.org/img/wn/${response.daily[day].weather[0].icon}.png">`);
         $(this).find("#forecast-temp").text(`Temp: ${response.daily[day].temp.day.toFixed(0)} °F`);
         $(this).find("#forecast-humidity").text(`Humidity: ${response.daily[day].humidity}%`);
+        $(this).show();
         day++;
         date.setTime(date.getTime() + MS_IN_DAY);
     });    
 }
-
-
-
-
 
 //history functions
 
@@ -177,8 +188,9 @@ const refreshHistory = () => {
 }
 
 //tests that the input isn't empty and hands it off if it is valid
-searchForm.on("submit", function(e) {
+$("#search-form").on("submit", function(e) {
     e.preventDefault();
+    const cityInput = $("#city");
     let input = cityInput.val().toLowerCase().trim();
     cityInput.val("");
     if(input.length > 0) {
