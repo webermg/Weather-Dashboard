@@ -18,10 +18,11 @@ do not add city to history or try to search if input empty -done
 revise cards -done
 format card info to fit
 border off daily section
-disable form submittal when requests are outstanding
+disable form submittal when requests are outstanding - deferred
 get uv index background working
 add loading indicator while calls are running -done
 format for mobile
 add a data-city attribute to history buttons
+allow for city, country or city,state,country
 
 searching for a city that does not exist returns 404
