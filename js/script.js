@@ -139,8 +139,9 @@ const loadForecastResult = response => {
     forecastCards.each(function() {
         $(this).find(".card-title").text(date.toLocaleDateString(undefined,{ month: 'numeric', day: 'numeric' }));
         $(this).find("#forecast-icon").html(`<img src="http://openweathermap.org/img/wn/${response.daily[day].weather[0].icon}.png">`);
-        $(this).find("#forecast-temp").text(`Temp: ${response.daily[day].temp.day.toFixed(0)} °F`);
-        $(this).find("#forecast-humidity").text(`Humidity: ${response.daily[day].humidity}%`);
+        $(this).find("#forecast-hi").text(`Hi: ${response.daily[day].temp.max.toFixed(0)}°F`);
+        $(this).find("#forecast-lo").text(`Lo: ${response.daily[day].temp.min.toFixed(0)}°F`);
+        $(this).find("#forecast-humidity").text(`Hum: ${response.daily[day].humidity}%`);
         $(this).show();
         day++;
         date.setTime(date.getTime() + MS_IN_DAY);
@@ -195,9 +196,9 @@ $("#search-form").on("submit", function(e) {
     cityInput.val("");
     if(input.length > 0) {
         getResults(input);
-        searchForm.find("#submit-btn").addClass("disabled");
+        $("#search-form").find("#submit-btn").addClass("disabled");
         setTimeout(() => {
-            searchForm.find("#submit-btn").removeClass("disabled");
+            $("#search-form").find("#submit-btn").removeClass("disabled");
         }, 1000);
     }
 })
