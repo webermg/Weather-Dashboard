@@ -38,7 +38,7 @@ $(window).on("unload", function() {
 
 const getResults = (city) => {
     const api = '432919c539be1e9eaadf34617ce6b063';
-    const queryURL = `https://geocode.xyz/${city}?json=1`;
+    const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`;
     loadingBar.show();
 
     $.ajax({
@@ -47,9 +47,8 @@ const getResults = (city) => {
     }).done(function(response) {
         //TODO remove this
         console.log(response);
-        if(response.error) return;
-        const lat = response.latt;
-        const lon = response.longt;
+        const lat = response.coord.lat;
+        const lon = response.coord.lon;
         queryURL2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&units=imperial&appid=${api}`;
         $.ajax({
             url: queryURL2,
@@ -68,6 +67,7 @@ const getResults = (city) => {
         
     }).fail(function(error) {
         console.log(error.responseText);
+        loadingBar.hide();
     });
 }
 
@@ -84,33 +84,58 @@ const loadTodayResult = (response, city) => {
     todayResults.children("#today-humidity").text(`Humidity: ${response.current.humidity}%`);
     todayResults.children("#today-wind").text(`Wind Speed:  ${response.current.wind_speed} MPH`);
     todayResults.find("#uv-value").text(` ${response.current.uvi} `);
-    todayResults.find("#uv-value").addClass("red");
+    todayResults.find("#uv-value").removeClass("green yellow orange red purple");
+    //select uvi scale color
+    switch(Math.floor(response.current.uvi)) {
+        case 1:
+        case 2:
+            todayResults.find("#uv-value").addClass("green");
+            break;
+        case 3:
+        case 4:
+        case 5:
+            todayResults.find("#uv-value").addClass("yellow");
+            break;
+        case 6:
+        case 7:
+            todayResults.find("#uv-value").addClass("orange");
+            break;
+        case 8:
+        case 9:
+        case 10:
+            todayResults.find("#uv-value").addClass("red");
+            break;
+        default:
+            todayResults.find("#uv-value").addClass("purple");
+    }
 }
 
 const loadForecastResult = response => {
     let day = 0;
-    let tomorrow = new Date();
-    tomorrow.setTime(tomorrow.getTime() + MS_IN_DAY);
+    let date = new Date();
+    date.setTime(date.getTime() + MS_IN_DAY);
     forecastCards.each(function() {
-        $(this).find(".card-title").text(tomorrow.toLocaleDateString());
+        $(this).find(".card-title").text(date.toLocaleDateString(undefined,{ month: 'numeric', day: 'numeric' }));
         $(this).find("#forecast-icon").html(`<img src="http://openweathermap.org/img/wn/${response.daily[day].weather[0].icon}.png">`);
         $(this).find("#forecast-temp").text(`Temp: ${response.daily[day].temp.day} °F`);
         $(this).find("#forecast-humidity").text(`Humidity: ${response.daily[day].humidity}%`);
         day++;
-        tomorrow.setTime(tomorrow.getTime() + MS_IN_DAY);
+        date.setTime(date.getTime() + MS_IN_DAY);
     });    
 }
+
+
 
 searchForm.on("submit", function(e) {
     e.preventDefault();
     let input = cityInput.val().toLowerCase().trim();
     cityInput.val("");
-    //load into history
-    //  check history for duplicate
-    //  if duplicate then reorder history to put duplicate on top
-    //  else drop least recent and add to history
     if(input.length > 0) {
         getResults(input);
+        searchForm.find("#submit-btn").addClass("disabled");
+        setTimeout(() => {
+            searchForm.find("#submit-btn").removeClass("disabled");
+        }, 1000);
     }
 })
 
