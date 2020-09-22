@@ -28,6 +28,8 @@ $(document).ready(() => {
     loadingBar.hide();
     history = localStorage.getItem("history") != null ? JSON.parse(localStorage.getItem("history")) : [];
     refreshHistory();
+    console.log(history.length);
+    if(history.length > 0) getResults(history[0]);
 });
 
 //saves the existing search history to localstorage on document unload
@@ -169,7 +171,7 @@ const refreshHistory = () => {
     let historySection = $("#input-history");
     for (const item of history) {
         let row = $("<div>").addClass("row");
-        let col = $("<div>").addClass("col s12").html(`<a class="waves-effect waves-light btn-small stretch">${item}</a>`);
+        let col = $("<div>").addClass("col s12").html(`<a class="waves-effect waves-light btn-small stretch" data-city="${item}">${item}</a>`);
         historySection.append(row.append(col));
     }
 }
@@ -188,10 +190,11 @@ searchForm.on("submit", function(e) {
     }
 })
 
+//handles the history button clicks
 $("#input-history").on("click", function(e) {
-    bubbleUp($(e.target).text());
+    bubbleUp($(e.target).attr("data-city"));
     refreshHistory();
-    getResults($(e.target).text());
+    getResults($(e.target).attr("data-city"));
 });
 
 $("#clear-history").on("click", () => {
