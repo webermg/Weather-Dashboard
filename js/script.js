@@ -82,10 +82,10 @@ const getResults = (city) => {
 const loadTodayResult = (response, city) => {
     //header
     let today = new Date();
-    const header = todayResults.children("#today-header");
+    const header = $("#today-header");
     header.children("#city-name").text(city.toUpperCase());
     header.children("#today-date").text(`(${today.toLocaleDateString()})`);
-    header.children("#today-icon").html(`<img src="http://openweathermap.org/img/wn/${response.current.weather[0].icon}.png">`);
+    $("#today-icon").html(`<img src="http://openweathermap.org/img/wn/${response.current.weather[0].icon}@2x.png">`);
 
     todayResults.children("#today-temp").text(`Temperature: ${response.current.temp} °F`);
     todayResults.children("#today-humidity").text(`Humidity: ${response.current.humidity}%`);

@@ -19,9 +19,9 @@
     <!-- navbar boilerplate -->
     <nav>
         <div class="nav-wrapper grey">
-          <a class="brand-logo center nowrap">Weather Service</a>
+            <a class="brand-logo center nowrap">Weather Service</a>
         </div>
-      </nav>
+    </nav>
 
     <main class="container mt1">
         <div class="row">
@@ -47,17 +47,38 @@
             </div>
             <div class="col l9 m8 s6 blue-grey lighten-4">
                 <div class="row">
-                    <div id="result-today" class="col s12">
-                        <div id="loading-bar" class="progress">
+                    <div class="col s12">
+                        <div id="loading-bar" class="progress col s12">
                             <div class="indeterminate"></div>
                         </div>
-                        <h4 id="today-header"><span id="city-name">---- </span> <span id="today-date"></span> <span
-                                id="today-icon"></span></h4>
-                        <p id="today-temp">Temperature: </p>
-                        <p id="today-humidity">Humidity: </p>
-                        <p id="today-wind">Wind Speed: </p>
-                        <p id="today-uv">UV Index: <span id="uv-value" class="white-text p1 border-round"></span></p>
+                        <div class="row">
+                            <div class="col s12 m8">
+                                <h4 id="today-header"><span id="city-name">---- </span> <span id="today-date"></span>
+                                </h4>
+                            </div>
+                            <div id="today-icon" class="col s12 m4"></div>
+                        </div>
+                        <div class="divider"></div>
+                        <div class="row">
+                            <div id="result-today" class="col s12">
+
+                                <!-- <h4 id="today-header"><span id="city-name">---- </span> <span id="today-date"></span> </h4> -->
+                                <p id="today-temp">Temperature: </p>
+                                <p id="today-humidity">Humidity: </p>
+                                <p id="today-wind">Wind Speed: </p>
+                                <p id="today-uv">UV Index: <span id="uv-value"
+                                        class="white-text p1 border-round"></span></p>
+                            </div>
+                            <!-- <ul class="collapsible col s12">
+                                <li>
+                                  <div class="collapsible-header"><i class="material-icons">filter_drama</i>First</div>
+                                  <div class="collapsible-body"><span>Lorem ipsum dolor sit amet.</span></div>
+                                </li>
+                              </ul> -->
+                        </div>
                     </div>
+                    <!-- <div id="today-icon" class="col s4"></div> -->
+                    <!-- <span id="today-icon"></span> -->
                 </div>
                 <div class="divider"></div>
                 <div class="row">
