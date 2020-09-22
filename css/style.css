@@ -19,15 +19,28 @@
   margin-top: 1em;
 }
 
-.mb0 {
-    margin-bottom: 0;
+.mb10 {
+    margin-bottom: 10px;
 }
 
 .border-round {
   border-radius: 5px;
 }
 
+/* sticky footer */
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
 
+main {
+  flex: 1 0 auto;
+}
+
+footer {
+  flex-shrink: 0;
+}
 
 .p1 {
   padding: 0.5em;

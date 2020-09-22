@@ -182,7 +182,7 @@ const refreshHistory = () => {
     $("#input-history").empty();
     let historySection = $("#input-history");
     for (const item of history) {
-        let row = $("<div>").addClass("row");
+        let row = $("<div>").addClass("row mb10");
         let col = $("<div>").addClass("col s12").html(`<a class="waves-effect waves-light btn-small stretch" data-city="${item}">${item}</a>`);
         historySection.append(row.append(col));
     }
