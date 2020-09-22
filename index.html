@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-    
+
 
     <!-- Materialize minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
@@ -17,70 +17,53 @@
 <body>
 
     <!-- navbar boilerplate -->
-    <nav class="light-blue lighten-1" role="navigation">
-        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">Logo</a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="#">Navbar Link</a></li>
-            </ul>
-
-            <ul id="nav-mobile" class="sidenav">
-                <li><a href="#">Navbar Link</a></li>
-            </ul>
-            <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+    <nav>
+        <div class="nav-wrapper">
+          <a href="#" class="brand-logo center">Weather Dashboard</a>
         </div>
-    </nav>
-    
-    <main class="container">
+      </nav>
+
+    <main class="container mt1">
         <div class="row">
             <div class="col s3">
                 <div class="row grey lighten-4">
-                    <!-- <div class="col s12"> -->
-                        <form id="search-form" class="input-field col s12">
-                            <!-- <div class="row"> -->
-                            <!-- <div class="col s9"> -->
-                                <label for="city">City</label>
-                                <input id="city" type="text" class="validate">
-                            
-                            <!-- </div> -->
-                            <!-- <div class="col s3"> -->
-                            <button class="btn waves-effect waves-light right" type="submit" name="action" id="submit-btn">
-                                <i class="material-icons">search</i>
-                            </button>
-                            <!-- </div> -->
-                            <!-- </div> -->
-                        </form>
-                    <!-- </div> -->
+                    <form id="search-form" class="input-field col s12">
+                        <label for="city">City</label>
+                        <input id="city" type="text" class="validate">
+                        <button class="btn waves-effect waves-light right" type="submit" name="action" id="submit-btn">
+                            <i class="material-icons">search</i>
+                        </button>
+                    </form>
                 </div>
                 <div class="row">
                     <div id="input-history" class="col s12">
-                        
                     </div>
                 </div>
                 <div class="row">
                     <div class="col s12">
                         <a id="clear-history" class="waves-effect waves-light btn-large stretch">Clear History</a>
                     </div>
-                    
                 </div>
             </div>
             <div class="col s9 blue-grey lighten-4">
                 <div class="row">
-                        <div id="result-today" class="col s12">
-                            <div id="loading-bar" class="progress">
-                                <div class="indeterminate"></div>
-                            </div>
-                            <h4 id="today-header" ><span id="city-name">---- </span> <span id="today-date"></span> <span id="today-icon"></span></h4>
-                            <p id="today-temp">Temperature: </p>
-                            <p id="today-humidity">Humidity: </p>
-                            <p id="today-wind">Wind Speed: </p>
-                            <p id="today-uv">UV Index: <span id="uv-value" class="darken-1"></span></p>
+                    <div id="result-today" class="col s12">
+                        <div id="loading-bar" class="progress">
+                            <div class="indeterminate"></div>
                         </div>
+                        <h4 id="today-header"><span id="city-name">---- </span> <span id="today-date"></span> <span
+                                id="today-icon"></span></h4>
+                        <p id="today-temp">Temperature: </p>
+                        <p id="today-humidity">Humidity: </p>
+                        <p id="today-wind">Wind Speed: </p>
+                        <p id="today-uv">UV Index: <span id="uv-value" class="white-text"></span></p>
+                    </div>
                 </div>
                 <div class="divider"></div>
                 <div class="row">
                     <div id="forecast-header" class="col s12">
                         <h5>5-Day Forecast</h5>
-                    </div> 
+                    </div>
                 </div>
                 <div class="row">
                     <div id="forecast-cards" class="col s12">
@@ -88,54 +71,54 @@
                             <div class="col m5ths s6">
                                 <div class="card blue-grey darken-1">
                                     <div class="card-content white-text">
-                                    <span class="card-title">Date</span>
-                                    <p id="forecast-icon">weather icon</p>
-                                    <p id="forecast-temp">temp</p>
-                                    <p id="forecast-humidity">humidity</p>
+                                        <span class="card-title"></span>
+                                        <p id="forecast-icon"></p>
+                                        <p id="forecast-temp"></p>
+                                        <p id="forecast-humidity"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col m5ths s6">
                                 <div class="card blue-grey darken-1">
                                     <div class="card-content white-text">
-                                    <span class="card-title">Date</span>
-                                    <p id="forecast-icon">weather icon</p>
-                                    <p id="forecast-temp">temp</p>
-                                    <p id="forecast-humidity">humidity</p>
+                                        <span class="card-title"></span>
+                                        <p id="forecast-icon"></p>
+                                        <p id="forecast-temp"></p>
+                                        <p id="forecast-humidity"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col m5ths s6">
                                 <div class="card blue-grey darken-1">
                                     <div class="card-content white-text">
-                                    <span class="card-title">Date</span>
-                                    <p id="forecast-icon">weather icon</p>
-                                    <p id="forecast-temp">temp</p>
-                                    <p id="forecast-humidity">humidity</p>
+                                        <span class="card-title"></span>
+                                        <p id="forecast-icon"></p>
+                                        <p id="forecast-temp"></p>
+                                        <p id="forecast-humidity"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col m5ths s6">
                                 <div class="card blue-grey darken-1">
                                     <div class="card-content white-text">
-                                    <span class="card-title">Date</span>
-                                    <p id="forecast-icon">weather icon</p>
-                                    <p id="forecast-temp">temp</p>
-                                    <p id="forecast-humidity">humidity</p>
+                                        <span class="card-title"></span>
+                                        <p id="forecast-icon"></p>
+                                        <p id="forecast-temp"></p>
+                                        <p id="forecast-humidity"></p>
                                     </div>
                                 </div>
                             </div>
                             <div class="col m5ths s6">
                                 <div class="card blue-grey darken-1">
                                     <div class="card-content white-text">
-                                    <span class="card-title">Date</span>
-                                    <p id="forecast-icon">weather icon</p>
-                                    <p id="forecast-temp">temp</p>
-                                    <p id="forecast-humidity">humidity</p>
+                                        <span class="card-title"></span>
+                                        <p id="forecast-icon"></p>
+                                        <p id="forecast-temp"></p>
+                                        <p id="forecast-humidity"></p>
                                     </div>
                                 </div>
                             </div>
-                            
+
                         </div>
                     </div>
                 </div>
@@ -187,7 +170,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    
+
     <script type="text/javascript" src="js/script.js"></script>
 </body>
 

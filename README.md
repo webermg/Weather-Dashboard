@@ -22,5 +22,6 @@ disable form submittal when requests are outstanding
 get uv index background working
 add loading indicator while calls are running -done
 format for mobile
+add a data-city attribute to history buttons
 
 searching for a city that does not exist returns 404
