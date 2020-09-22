@@ -15,14 +15,23 @@ empty out city field when form submitted -done
 trim city input on submit - done
 
 do not add city to history or try to search if input empty -done
-revise cards -done
-format card info to fit
-border off daily section
+revise cards -done 
+format card info to fit -done
+revise header to stay on one line -done
+
 disable form submittal when requests are outstanding - deferred
-get uv index background working
+get uv index background working -done
 add loading indicator while calls are running -done
-format for mobile
+
+format for viewports 1200, 992, 600, 500 -done
 add a data-city attribute to history buttons
+    add to buttons
+    pass to getresults
+fix uvi display
+hide cards on page load
+
+border off daily section
 allow for city, country or city,state,country
+add an accordion thing to hold more data
 
 searching for a city that does not exist returns 404

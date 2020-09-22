@@ -27,6 +27,10 @@
   border-radius: 5px;
 }
 
+.p1 {
+  padding: 0.5em;
+}
+
 .plr1 {
   padding-left: 0.5em !important;
   padding-right: 0.5em !important;
