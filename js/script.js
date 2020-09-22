@@ -60,13 +60,18 @@ const getResults = (city) => {
             refreshHistory();
             loadTodayResult(response, city);
             loadForecastResult(response);
-            loadingBar.hide();
         }).fail(function(error) {
+            let text = JSON.parse(error.responseText);
             console.log(error.responseText);
+            M.toast({html: `Error: ${text.message}`});
         });
         
     }).fail(function(error) {
+        let text = JSON.parse(error.responseText);
         console.log(error.responseText);
+        M.toast({html: `Error: ${text.message}`});
+
+    }).always(() => {
         loadingBar.hide();
     });
 }
