@@ -1,37 +1,11 @@
 # Weather-Dashboard
 
-lay out basic html -done
+A dashboard showing current weather conditions and a future forecast. Cities that are searched are displayed in the main frame and logged to the history pane. Clicking on a city in the history pane will re-display that city's weather. The history is locally saved and upon page load the most recent city, if any, will be displayed. The app will maintain a legible appearance on screens down to Iphone size (375px wide). Searching by other parameters such as zip code or latitude/longitude is not possible currently.
 
-js
-grab references to elements -done
-create init function -done
-create ajax call -done
-populate today data for searched city -done
-populate forecast for searched city -done
-build a queue for search history -done
-get icons working -done
+Uses Materialize as the framework and OpenWeather for the data source.
 
-empty out city field when form submitted -done
-trim city input on submit - done
+![screenshot](screenshots/Screenshot1.png?raw=true)
 
-do not add city to history or try to search if input empty -done
-revise cards -done 
-format card info to fit -done
-revise header to stay on one line -done
+https://webermg.github.io/Weather-Dashboard/
 
-disable form submittal when requests are outstanding - deferred
-get uv index background working -done
-add loading indicator while calls are running -done
-
-format for viewports 1200, 992, 600, 500 -done
-add a data-city attribute to history buttons -done
-    add to buttons
-    pass to getresults
-fix uvi display -done
-hide cards on page load -done
-
-border off daily section -done
-allow for city, country or city,state,country
-add an accordion thing to hold more data
-
-searching for a city that does not exist returns 404
+https://github.com/webermg/Weather-Dashboard

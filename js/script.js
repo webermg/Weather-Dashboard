@@ -1,16 +1,3 @@
-//input
-//today results
-//  name date icon
-//  temp
-//  humidity
-//  windspeed
-//  uv-index
-//cards
-//  date
-//  icon
-//  temp
-//  humidity
-
 //element references
 const loadingBar = $("#loading-bar");
 const forecastCards = $("#forecast-cards .card");
@@ -38,7 +25,8 @@ $(window).on("unload", function() {
     localStorage.setItem("history", JSON.stringify(history));
 })
 
-//makes the api calls
+//obtains the data from the openweather service
+//two steps, first get latitude and longitude from current api then use them for onecall api
 const getResults = (city) => {
     const api = '432919c539be1e9eaadf34617ce6b063';
     const queryURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api}`;
@@ -48,8 +36,6 @@ const getResults = (city) => {
         url: queryURL,
         method: 'GET'
     }).done(function(response) {
-        //TODO remove this
-        console.log(response);
         const lat = response.coord.lat;
         const lon = response.coord.lon;
         queryURL2 = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude=minutely,hourly&units=imperial&appid=${api}`;
@@ -57,8 +43,6 @@ const getResults = (city) => {
             url: queryURL2,
             method: 'GET'
         }).done(function(response) {
-            //TODO remove this
-            console.log(response);
             addToHistory(city);
             refreshHistory();
             loadTodayResult(response, city);
@@ -83,7 +67,8 @@ const getResults = (city) => {
 const loadTodayResult = (response, city) => {
     const todayResults = $("#result-today");
     const moreTodayResults = $("#result-today-more");
-    //header
+    
+    //section header
     let today = new Date();
     const header = $("#today-header");
     header.children("#city-name").text(city.toUpperCase());
@@ -188,6 +173,8 @@ const refreshHistory = () => {
     }
 }
 
+//event handlers
+
 //tests that the input isn't empty and hands it off if it is valid
 $("#search-form").on("submit", function(e) {
     e.preventDefault();
@@ -210,6 +197,7 @@ $("#input-history").on("click", function(e) {
     getResults($(e.target).attr("data-city"));
 });
 
+//clears out the history and resets the display
 $("#clear-history").on("click", () => {
     history = [];
     refreshHistory();
